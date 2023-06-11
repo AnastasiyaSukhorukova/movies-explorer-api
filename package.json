@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/AnastasiyaSukhorukova/movies-explorer-api/issues"
   },
-  "homepage": "https://github.com/AnastasiyaSukhorukova/movies-explorer-api#readme"
+  "homepage": "https://github.com/AnastasiyaSukhorukova/movies-explorer-api#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.2.3"
+  }
 }
