@@ -16,7 +16,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb', {});
 
 app.use('/', require('./routes/auth'));
 app.use('/users', auth, require('./routes/users'));
-app.use('/movie', auth, require('./routes/movie'));
+app.use('/movies', auth, require('./routes/movies'));
 app.use(require('./middlewares/notFoundPath'));
 
 app.use(errorLogger);
