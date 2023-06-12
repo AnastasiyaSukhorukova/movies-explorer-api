@@ -1,4 +1,13 @@
 const { celebrate, Joi } = require('celebrate');
+const validator = require('validator');
+const validationError = require('../errors/validationError');
+
+const urlValidator = (value) => {
+  if (!validator.isURL(value)) {
+    throw validationError;
+  }
+  return value;
+};
 
 const signUpJoi = celebrate({
   body: Joi.object().keys({
