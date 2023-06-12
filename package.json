@@ -19,6 +19,8 @@
   "homepage": "https://github.com/AnastasiyaSukhorukova/movies-explorer-api#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "celebrate": "^15.0.1",
+    "joi": "^17.9.2",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.2.3"
   }
