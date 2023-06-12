@@ -1,5 +1,20 @@
 const { celebrate, Joi } = require('celebrate');
 
+const signUpJoi = celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().required().email(),
+    password: Joi.string().required(),
+    name: Joi.string().required().min(2).max(30),
+  }),
+});
+
+const signInJoi = celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().required().email(),
+    password: Joi.string().required(),
+  }),
+});
+
 const createUserJoi = celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
@@ -50,6 +65,8 @@ const deleteMovieJoi = celebrate({
 });
 
 module.exports = {
+  signUpJoi,
+  signInJoi,
   createUserJoi,
   loginJoi,
   getUserIdJoi,
