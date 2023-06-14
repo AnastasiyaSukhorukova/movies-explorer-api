@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
+const cors = require('cors');
 
 const errorsMiddleware = require('./middlewares/errors');
 const auth = require('./middlewares/auth');
@@ -8,6 +9,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 const app = express();
+app.use(cors());
 app.use(requestLogger);
 
 app.use(express.json());
