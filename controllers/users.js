@@ -50,9 +50,7 @@ const updateUser = (req, res, next) => {
 
   User.findByIdAndUpdate(req.user._id, { email, name }, { new: true, runValidators: true })
     .orFail()
-    .then((user) => {
-      res.status(201).send({ email: user.email, name: user.name });
-    })
+    .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'DocumentNotFoundError') {
         return next(new NotFoundError('Пользователь не найден.'));
