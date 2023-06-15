@@ -12,12 +12,6 @@ const NotFoundError = require('../errors/notFoundError');
 
 router.use(requestLogger); // подключаем логгер запросов
 
-router.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
-  }, 0);
-});
-
 router.post('/signin', loginJoi, login);
 router.post('/signup', createUserJoi, createUser);
 
