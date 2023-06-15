@@ -1,7 +1,7 @@
 // схема карточки
 const mongoose = require('mongoose');
 const validator = require('validator');
-const User = require("./user");
+const User = require('./user');
 
 const movieSchema = new mongoose.Schema({
   country: {

@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const NotFoundError = require('../errors/notFoundError');
+const BadRequestError = require('../errors/badRequestError');
+const ConflictError = require('../errors/conflictError');
 
 const getUserId = (req, res, next) => {
   User.findById(req.user._id)
@@ -49,7 +51,7 @@ const updateUser = (req, res, next) => {
   User.findByIdAndUpdate(req.user._id, { email, name }, { new: true, runValidators: true })
     .orFail()
     .then((user) => {
-      res.status(201).send({ email: user.email, name: user.name })
+      res.status(201).send({ email: user.email, name: user.name });
     })
     .catch((err) => {
       if (err.name === 'DocumentNotFoundError') {
