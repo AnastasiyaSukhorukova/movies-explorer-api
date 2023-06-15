@@ -1,6 +1,7 @@
 // схема карточки
 const mongoose = require('mongoose');
 const validator = require('validator');
+const User = require("./user");
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -36,7 +37,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => validator.isURL(v, { require_protocol: true, require_valid_protocol: true, protocols: ['http', 'https'] }),
-      message: 'Некорректная ссылка на постер к фильму',
+      message: 'Некорректная ссылка на трейлер к фильму',
     },
   },
   thumbnail: {
@@ -44,12 +45,12 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => validator.isURL(v, { require_protocol: true, require_valid_protocol: true, protocols: ['http', 'https'] }),
-      message: 'Некорректная ссылка на постер к фильму',
+      message: 'Некорректная ссылка на миниатюрное изображение постера к фильму',
     },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
+    ref: User,
     required: true,
   },
   movieId: {
