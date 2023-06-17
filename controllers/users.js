@@ -13,7 +13,7 @@ const getUserId = (req, res, next) => {
     }))
     .catch((err) => {
       if (err.name === 'DocumentNotFoundError') {
-        return next(new NotFoundError('Пользователь не найден.'));
+        return next(new BadRequestError('Пользователь не найден.'));
       }
       return next(err);
     });
@@ -35,7 +35,7 @@ const createUser = (req, res, next) => {
         })
         .catch((err) => {
           if (err.name === 'ValidationError') {
-            return next(new BadRequestError('Переданы некорректные данные при создании пользователя.'));
+            return next(new NotFoundError('Переданы некорректные данные при создании пользователя.'));
           }
           if (err.code === 11000) {
             return next(new ConflictError('Пользователь с указанным e-mail уже зарегистрирован.'));
@@ -53,10 +53,10 @@ const updateUser = (req, res, next) => {
     .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'DocumentNotFoundError') {
-        return next(new NotFoundError('Пользователь не найден.'));
+        return next(new BadRequestError('Пользователь не найден.'));
       }
       if (err.name === 'ValidationError') {
-        return next(new BadRequestError('Переданы некорректные данные при обновлении профиля.'));
+        return next(new NotFoundError('Переданы некорректные данные при обновлении профиля.'));
       }
       return next(err);
     });

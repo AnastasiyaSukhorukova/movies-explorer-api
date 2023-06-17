@@ -2,29 +2,29 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
-const { errors } = require('celebrate');
+const rateLimit = require('express-rate-limit');
 
 const errorsMiddleware = require('./middlewares/errors');
-const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { limiterSetting } = require('./constants/constants');
 
-const { PORT = 3000 } = process.env;
+const { PORT, DB_ADDRESS } = require('./constants/config');
+
+const router = require('./routes');
+
 const app = express();
+
+const limiter = rateLimit(limiterSetting);
+app.use(limiter);
+
 app.use(cors());
 
-app.use(requestLogger);
-
 app.use(express.json());
-// подключаемся к серверу mongo
-mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb', {});
+mongoose.connect(DB_ADDRESS, {});
 
-app.use('/', require('./routes/auth'));
-app.use('/users', auth, require('./routes/users'));
-app.use('/movies', auth, require('./routes/movies'));
-
+app.use(requestLogger);
+app.use(router);
 app.use(errorLogger);
-app.use(errors());
 app.use(errorsMiddleware);
 
 app.listen(PORT, () => {

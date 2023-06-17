@@ -1,6 +1,7 @@
 const Movie = require('../models/movie');
 const NotFoundError = require('../errors/notFoundError');
 const ForbiddenError = require('../errors/forbiddenError');
+const BadRequestError = require('../errors/badRequestError');
 
 const getMovies = (req, res, next) => {
   Movie.find({ owner: req.user._id })
@@ -43,13 +44,19 @@ const createMovie = (req, res, next) => {
     .then((movie) => {
       res.status(201).send(movie);
     })
-    .catch((err) => next(err));
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        return next(new NotFoundError('Ошибка валидации данных!'));
+      }
+
+      return next(err);
+    });
 };
 
 const deleteMovie = (req, res, next) => {
   Movie.findById(req.params._id)
     .orFail(() => {
-      throw new NotFoundError('Фильм с указанным id не найден');
+      throw new BadRequestError('Фильм с указанным id не найден');
     })
     .then((movie) => {
       if (`${movie.owner}` !== req.user._id) {
@@ -59,7 +66,7 @@ const deleteMovie = (req, res, next) => {
       }
       Movie.findByIdAndRemove(req.params._id)
         .orFail(() => {
-          throw new NotFoundError('Фильм с указанным id не найден');
+          throw new BadRequestError('Фильм с указанным id не найден');
         })
         .then(() => {
           res.send({ message: 'Фильм удален' });
