@@ -21,7 +21,7 @@ router.get('/signout', (req, res) => {
 
 router.use('/users', auth, usersRouter);
 router.use('/movies', auth, moviesRouter);
-router.use('/*', auth, (req, res, next) => next(new BadRequestError('This page not found')));
+router.use('/*', auth, (req, res, next) => next(new BadRequestError('Страница не найдена!')));
 
 router.get('/crash-test', () => {
   setTimeout(() => {
