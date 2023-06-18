@@ -11,7 +11,7 @@ const { login } = require('../controllers/login');
 const { auth } = require('../middlewares/auth');
 const usersRouter = require('./users');
 const moviesRouter = require('./movies');
-const BadRequestError = require('../errors/badRequestError');
+const NotFoundError = require('../errors/notFoundError');
 
 router.post('/signin', signUpJoi, login);
 router.post('/signup', signInJoi, createUser);
@@ -21,7 +21,7 @@ router.get('/signout', (req, res) => {
 
 router.use('/users', auth, usersRouter);
 router.use('/movies', auth, moviesRouter);
-router.use('/*', auth, (req, res, next) => next(new BadRequestError('Страница не найдена!')));
+router.use('/*', auth, (req, res, next) => next(new NotFoundError('Страница не найдена!')));
 
 router.get('/crash-test', () => {
   setTimeout(() => {
