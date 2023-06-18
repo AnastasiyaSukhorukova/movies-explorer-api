@@ -8,7 +8,7 @@ const { createUser } = require('../controllers/users');
 const { login } = require('../controllers/login');
 
 // получение мидлвары для проверки токена в запросе
-const { auth } = require('../middlewares/auth');
+const auth = require('../middlewares/auth');
 const usersRouter = require('./users');
 const moviesRouter = require('./movies');
 const NotFoundError = require('../errors/notFoundError');
