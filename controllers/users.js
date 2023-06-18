@@ -52,12 +52,10 @@ const updateUser = (req, res, next) => {
     .orFail()
     .then((user) => res.send(user))
     .catch((err) => {
-      if (err.name === 'DocumentNotFoundError') {
-        return next(new BadRequestError('Пользователь не найден.'));
+      if (err.name === 'CastError' || err.name === 'ValidationError') {
+        return next(new NotFoundError('Передан неверный идентификатор пользователя'));
       }
-      if (err.name === 'ValidationError') {
-        return next(new NotFoundError('Переданы некорректные данные при обновлении профиля.'));
-      }
+
       return next(err);
     });
 };
