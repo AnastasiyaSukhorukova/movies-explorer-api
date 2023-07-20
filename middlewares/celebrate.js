@@ -11,7 +11,7 @@ const { urlPattern } = require('../constants/constants');
 
 const signInJoi = celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required().email(),
+    email: Joi.string().email(),
     password: Joi.string().required(),
   }),
 });
