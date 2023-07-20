@@ -21,13 +21,13 @@ const getUserId = (req, res, next) => {
 
 const createUser = (req, res, next) => {
   const {
-    email, password, name,
+    name, email, password,
   } = req.body;
 
   bcrypt.hash(password, 16)
     .then((hash) => {
       User.create({
-        email, password: hash, name,
+        name, email, password: hash,
       })
         .then((user) => {
           const noPasswordUser = user.toObject({ useProjection: true });
