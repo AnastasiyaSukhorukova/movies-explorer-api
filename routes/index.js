@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const { errors } = require('celebrate');
 const {
-  createUserJoi,
   signInJoi,
 } = require('../middlewares/celebrate');
 const { createUser } = require('../controllers/users');
@@ -14,7 +13,7 @@ const moviesRouter = require('./movies');
 const NotFoundError = require('../errors/notFoundError');
 
 router.post('/signin', signInJoi, login);
-router.post('/signup', createUserJoi, createUser);
+router.post('/signup', createUser);
 router.get('/signout', (req, res) => {
   res.clearCookie('jwt').send({ message: 'Выход' });
 });

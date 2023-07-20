@@ -1,13 +1,13 @@
 const { celebrate, Joi } = require('celebrate');
 const { urlPattern } = require('../constants/constants');
 
-const signUpJoi = celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required(),
-    name: Joi.string().required().min(2).max(30),
-  }),
-});
+// const signUpJoi = celebrate({
+//   body: Joi.object().keys({
+//     email: Joi.string().required().email(),
+//     password: Joi.string().required(),
+//     name: Joi.string().required().min(2).max(30),
+//   }),
+// });
 
 const signInJoi = celebrate({
   body: Joi.object().keys({
@@ -20,7 +20,7 @@ const createUserJoi = celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required().min(1),
-    name: Joi.string().min(2).max(30).required(),
+    name: Joi.string().required().min(2).max(30),
   }),
 });
 
@@ -67,7 +67,6 @@ const deleteMovieJoi = celebrate({
 });
 
 module.exports = {
-  signUpJoi,
   signInJoi,
   createUserJoi,
   loginJoi,
