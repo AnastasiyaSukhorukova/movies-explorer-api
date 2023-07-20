@@ -11,14 +11,14 @@ const { urlPattern } = require('../constants/constants');
 
 const signInJoi = celebrate({
   body: Joi.object().keys({
-    email: Joi.string().email(),
+    email: Joi.string().email().required(),
     password: Joi.string().required(),
   }),
 });
 
 const createUserJoi = celebrate({
   body: Joi.object().keys({
-    email: Joi.string().email(),
+    email: Joi.string().required().email(),
     password: Joi.string().required().min(1),
     name: Joi.string().required().min(2).max(30),
   }),
