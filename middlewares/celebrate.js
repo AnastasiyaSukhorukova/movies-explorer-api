@@ -24,13 +24,6 @@ const createUserJoi = celebrate({
   }),
 });
 
-const loginJoi = celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required().min(1),
-  }),
-});
-
 const getUserIdJoi = celebrate({
   params: Joi.object().keys({
     userId: Joi.string().required().hex().length(24),
@@ -69,7 +62,6 @@ const deleteMovieJoi = celebrate({
 module.exports = {
   signInJoi,
   createUserJoi,
-  loginJoi,
   getUserIdJoi,
   updateUserJoi,
   createMovieJoi,
