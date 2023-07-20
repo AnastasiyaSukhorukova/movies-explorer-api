@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const AuthError = require('../errors/authError');
 
-module.exports.login = (req, res, next) => {
+const login = (req, res, next) => {
   const { email, password } = req.body;
 
   User.findOne({ email }).select('+password')
@@ -30,4 +30,8 @@ module.exports.login = (req, res, next) => {
         });
     })
     .catch(next);
+};
+
+module.exports = {
+  login,
 };
