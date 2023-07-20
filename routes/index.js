@@ -13,8 +13,8 @@ const usersRouter = require('./users');
 const moviesRouter = require('./movies');
 const NotFoundError = require('../errors/notFoundError');
 
-router.post('/signin', signUpJoi, login);
-router.post('/signup', signInJoi, createUser);
+router.post('/signin', signInJoi, login);
+router.post('/signup', signUpJoi, createUser);
 router.get('/signout', (req, res) => {
   res.clearCookie('jwt').send({ message: 'Выход' });
 });
