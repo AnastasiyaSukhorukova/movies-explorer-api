@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
+const { corsOptions } = require('./constants/constants');
 
 const errorsMiddleware = require('./middlewares/errors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -15,7 +16,7 @@ const app = express();
 const limiter = rateLimit(limiterSetting);
 app.use(limiter);
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use(express.json());
 mongoose.connect(DB_ADDRESS, {});

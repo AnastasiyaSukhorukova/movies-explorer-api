@@ -9,10 +9,26 @@ const limiterSetting = {
   legacyHeaders: false,
 };
 
+const allowedCors = [
+  'https://anastasiya.movies.nomoredomains.rocks',
+  'http://anastasiya.movies.nomoredomains.rocks',
+  'localhost:3000',
+  'http://localhost',
+  'http://localhost:3001',
+  'http://localhost:3000',
+];
+
+const corsOptions = {
+  origin: allowedCors,
+  optionsSuccessStatus: 200,
+  credentials: true,
+};
+
 module.exports = {
   CODE_OK,
   CODE_CREATED,
   defaultErrorMessage,
   urlPattern,
   limiterSetting,
+  corsOptions,
 };
