@@ -19,10 +19,9 @@ router.get('/signout', (req, res) => {
   res.clearCookie('jwt').send({ message: 'Выход' });
 });
 
-// router.use(auth);
 router.use('/users', auth, usersRouter);
 router.use('/movies', auth, moviesRouter);
-router.use('/*', auth, (req, res, next) => next(new NotFoundError('Страница не найдена!')));
+router.use('/*', (req, res, next) => next(new NotFoundError('Страница не найдена!')));
 
 router.get('/crash-test', () => {
   setTimeout(() => {

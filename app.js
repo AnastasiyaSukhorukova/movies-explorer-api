@@ -1,8 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const cors = require('cors');
-// const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
 const { corsOptions } = require('./constants/constants');
 
@@ -12,6 +12,8 @@ const { limiterSetting } = require('./constants/constants');
 
 const { PORT, DB_ADDRESS } = require('./constants/config');
 
+mongoose.connect(DB_ADDRESS, {});
+
 const app = express();
 
 const limiter = rateLimit(limiterSetting);
@@ -19,8 +21,9 @@ app.use(limiter);
 
 app.use(cors(corsOptions));
 
-app.use(express.json());
-mongoose.connect(DB_ADDRESS, {});
+// app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(requestLogger);
 
