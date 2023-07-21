@@ -17,19 +17,6 @@ const app = express();
 const limiter = rateLimit(limiterSetting);
 app.use(limiter);
 
-// app.use(cookieParser());
-// app.use(cors({
-//   origin: [
-//     'https://anastasiya.movies.nomoredomains.rocks',
-//     'http://anastasiya.movies.nomoredomains.rocks',
-//     'localhost:3000',
-//   ],
-//   credentials: true,
-//   maxAge: 60,
-//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-//   allowedHeaders: ['Content-Type', 'Authorization'],
-// }));
-
 app.use(cors(corsOptions));
 
 app.use(express.json());
