@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 // const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
-// const { corsOptions } = require('./constants/constants');
+const { corsOptions } = require('./constants/constants');
 
 const errorsMiddleware = require('./middlewares/errors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -30,7 +30,7 @@ app.use(limiter);
 //   allowedHeaders: ['Content-Type', 'Authorization'],
 // }));
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use(express.json());
 mongoose.connect(DB_ADDRESS, {});
