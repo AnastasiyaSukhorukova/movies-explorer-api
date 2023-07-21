@@ -10,7 +10,7 @@ const getUserId = (req, res, next) => {
     .orFail()
     .then((user) => res.status(200).send({
       email: user.email,
-      password: user.password,
+      name: user.name,
     }))
     .catch((err) => {
       if (err.name === 'DocumentNotFoundError') {
