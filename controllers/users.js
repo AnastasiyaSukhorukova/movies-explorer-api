@@ -1,3 +1,4 @@
+// все ок
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const NotFoundError = require('../errors/notFoundError');
