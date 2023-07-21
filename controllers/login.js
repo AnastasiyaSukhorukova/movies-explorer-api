@@ -26,6 +26,11 @@ const login = (req, res, next) => {
             NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
             { expiresIn: '7d' },
           );
+          res.cookie('jwt', token, {
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+            httpOnly: true,
+            saneSite: true,
+          });
           return res.send({ token });
         });
     })
