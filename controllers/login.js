@@ -24,14 +24,11 @@ const login = (req, res, next) => {
           const token = jwt.sign(
             { _id: user._id },
             NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
-            { expiresIn: '7d' },
+            {
+              expiresIn: '7d',
+            },
           );
-          return res.cookie('jwt', token, {
-            maxAge: 7 * 24 * 60 * 60 * 1000,
-            httpOnly: true,
-            sameSite: 'none',
-            secure: true,
-          }).send({ message: 'куки получены' });
+          res.status(200).send({ token });
         });
     })
     .catch(next);

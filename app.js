@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const cookieParser = require('cookie-parser');
+// const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
 // const { corsOptions } = require('./constants/constants');
 
@@ -17,18 +17,20 @@ const app = express();
 const limiter = rateLimit(limiterSetting);
 app.use(limiter);
 
-app.use(cookieParser());
-app.use(cors({
-  origin: [
-    'https://anastasiya.movies.nomoredomains.rocks',
-    'http://anastasiya.movies.nomoredomains.rocks',
-    'localhost:3000',
-  ],
-  credentials: true,
-  maxAge: 60,
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  allowedHeaders: ['Content-Type', 'Authorization'],
-}));
+// app.use(cookieParser());
+// app.use(cors({
+//   origin: [
+//     'https://anastasiya.movies.nomoredomains.rocks',
+//     'http://anastasiya.movies.nomoredomains.rocks',
+//     'localhost:3000',
+//   ],
+//   credentials: true,
+//   maxAge: 60,
+//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   allowedHeaders: ['Content-Type', 'Authorization'],
+// }));
+
+app.use(cors());
 
 app.use(express.json());
 mongoose.connect(DB_ADDRESS, {});
