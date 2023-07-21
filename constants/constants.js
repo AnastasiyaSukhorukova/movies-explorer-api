@@ -11,6 +11,8 @@ const limiterSetting = {
 
 const allowedCors = [
   'https://anastasiya.movies.nomoredomains.rocks',
+  'https://api.anastasiya.movies.nomoredomains.rocks',
+  'http://api.anastasiya.movies.nomoredomains.rocks',
   'http://anastasiya.movies.nomoredomains.rocks',
   'localhost:3000',
   'http://localhost',
